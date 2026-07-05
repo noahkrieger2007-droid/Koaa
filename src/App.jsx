@@ -8,6 +8,7 @@ import Menu from './pages/Menu.jsx'
 import Concept from './pages/Concept.jsx'
 import Events from './pages/Events.jsx'
 import Contact from './pages/Contact.jsx'
+import { Impressum, Datenschutz } from './pages/Legal.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -32,6 +33,8 @@ export default function App() {
             <Route path="/concept" element={<Concept />} />
             <Route path="/events" element={<Events />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/impressum" element={<Impressum />} />
+            <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </AnimatePresence>

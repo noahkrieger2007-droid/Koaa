@@ -52,11 +52,31 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-cream/10">
-        <p className="mx-auto max-w-6xl px-5 py-5 text-xs text-cream/40 md:px-8">
-          © {new Date().getFullYear()} KOOA Concept · Saarbrücken · Mit viel
-          Matcha gemacht 🍵
+      {/* Großes Wordmark als Brand-Moment */}
+      <div
+        aria-hidden="true"
+        className="select-none overflow-hidden px-5 md:px-8"
+      >
+        <p className="mx-auto max-w-6xl text-center font-serif text-[22vw] font-bold leading-[0.85] tracking-widest2 text-cream/[0.06] md:text-[13rem]">
+          KOOA
         </p>
+      </div>
+
+      <div className="border-t border-cream/10">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-5 md:px-8">
+          <p className="text-xs text-cream/40">
+            © {new Date().getFullYear()} KOOA Concept · Saarbrücken · Mit viel
+            Matcha gemacht 🍵
+          </p>
+          <p className="flex gap-5 text-xs text-cream/40">
+            <Link to="/impressum" className="transition-colors hover:text-matcha">
+              Impressum
+            </Link>
+            <Link to="/datenschutz" className="transition-colors hover:text-matcha">
+              Datenschutz
+            </Link>
+          </p>
+        </div>
       </div>
     </footer>
   )

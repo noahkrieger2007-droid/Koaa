@@ -1,6 +1,10 @@
+import { motion } from 'framer-motion'
 import PageWrapper from '../components/PageWrapper.jsx'
 import Reveal from '../components/Reveal.jsx'
 import ImagePlaceholder from '../components/ImagePlaceholder.jsx'
+import Marquee from '../components/Marquee.jsx'
+import Squiggle from '../components/Squiggle.jsx'
+import ArrowLink from '../components/ArrowLink.jsx'
 
 const events = [
   {
@@ -36,7 +40,9 @@ export default function Events() {
           <h1 className="mt-4 font-serif text-5xl font-bold text-brown md:text-7xl">
             Hier ist immer
             <br />
-            <em className="text-olive">was los.</em>
+            <Squiggle>
+              <em className="text-olive">was los.</em>
+            </Squiggle>
           </h1>
           <p className="mx-auto mt-6 max-w-md text-lg text-brown/70">
             Workshops, Flohmärkte, Raves — KOOA ist mehr als Kaffee. Das steht
@@ -50,7 +56,10 @@ export default function Events() {
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
           {events.map((event, i) => (
             <Reveal key={event.name} delay={i * 0.15}>
-              <article className="group flex h-full flex-col overflow-hidden rounded-3xl bg-beige shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-olive/10">
+              <motion.article
+                whileHover={{ y: -8, rotate: i % 2 === 0 ? -1 : 1 }}
+                transition={{ type: 'spring', stiffness: 250, damping: 20 }}
+                className="group flex h-full flex-col overflow-hidden rounded-3xl bg-beige shadow-sm transition-shadow duration-500 hover:shadow-xl hover:shadow-olive/10">
                 <ImagePlaceholder
                   label={event.img}
                   tone={event.tone}
@@ -76,16 +85,27 @@ export default function Events() {
                     Mehr erfahren
                   </a>
                 </div>
-              </article>
+              </motion.article>
             </Reveal>
           ))}
         </div>
       </section>
 
+      {/* Laufband */}
+      <Marquee
+        words={[
+          'Matcha Rave',
+          'Spenden Flohmarkt',
+          'Schmuck Workshop',
+          'Same good vibes',
+          '@kooa_concept',
+        ]}
+      />
+
       {/* Instagram CTA */}
       <section className="relative overflow-hidden bg-olive px-5 py-24 text-center text-cream md:py-28">
-        <div className="pointer-events-none absolute -left-20 -top-16 h-64 w-64 rounded-blob bg-matcha/25" />
-        <div className="pointer-events-none absolute -bottom-20 -right-16 h-72 w-72 rounded-blob bg-cream/10" />
+        <div className="animate-blob pointer-events-none absolute -left-20 -top-16 h-64 w-64 rounded-blob bg-matcha/25" />
+        <div className="animate-blob-slow pointer-events-none absolute -bottom-20 -right-16 h-72 w-72 rounded-blob bg-cream/10" />
         <Reveal className="relative">
           <p className="text-xs uppercase tracking-widest2 text-cream/70">
             Nichts verpassen
@@ -97,14 +117,15 @@ export default function Events() {
             Neue Events, Workshop-Anmeldungen und spontane Specials posten wir
             immer zuerst dort. Folg uns und bleib im Loop.
           </p>
-          <a
-            href="https://instagram.com/kooa_concept"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-9 inline-block rounded-full bg-cream px-8 py-3.5 text-sm font-semibold text-olive transition-all duration-300 hover:-translate-y-0.5 hover:bg-beige"
-          >
-            @kooa_concept folgen
-          </a>
+          <div className="mt-9">
+            <ArrowLink
+              href="https://instagram.com/kooa_concept"
+              variant="cream"
+              className="font-semibold"
+            >
+              @kooa_concept folgen
+            </ArrowLink>
+          </div>
         </Reveal>
       </section>
     </PageWrapper>

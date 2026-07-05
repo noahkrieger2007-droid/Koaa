@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import PageWrapper from '../components/PageWrapper.jsx'
 import Reveal from '../components/Reveal.jsx'
+import Squiggle from '../components/Squiggle.jsx'
+import ArrowLink from '../components/ArrowLink.jsx'
 import { categories } from '../data/menu.js'
 
 function MenuItem({ item, index }) {
@@ -11,7 +12,7 @@ function MenuItem({ item, index }) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="group border-b border-brown/10 py-6 last:border-b-0"
+      className="group border-b border-brown/10 py-6 transition-colors duration-300 last:border-b-0 hover:border-matcha/40"
     >
       <div className="flex items-baseline justify-between gap-4">
         <h3 className="font-serif text-xl font-semibold text-brown transition-colors group-hover:text-olive md:text-2xl">
@@ -56,7 +57,9 @@ export default function Menu() {
           <h1 className="mt-4 font-serif text-5xl font-bold text-brown md:text-7xl">
             Neue Getränke.
             <br />
-            <em className="text-olive">Neues Deli.</em>
+            <Squiggle>
+              <em className="text-olive">Neues Deli.</em>
+            </Squiggle>
           </h1>
           <p className="mx-auto mt-6 max-w-md text-lg text-brown/70">
             Alles frisch, vieles saisonal — und immer mit einem Löffel guter
@@ -159,12 +162,11 @@ export default function Menu() {
           <p className="mt-3 text-brown/70">
             Fröschengasse 13–17 · Mo–Sa 9–18 Uhr
           </p>
-          <Link
-            to="/contact"
-            className="mt-8 inline-block rounded-full bg-brown px-8 py-3.5 text-sm font-medium text-cream transition-all duration-300 hover:-translate-y-0.5 hover:bg-olive"
-          >
-            Komm vorbei
-          </Link>
+          <div className="mt-8">
+            <ArrowLink to="/contact" variant="solid">
+              Komm vorbei
+            </ArrowLink>
+          </div>
         </Reveal>
       </section>
     </PageWrapper>

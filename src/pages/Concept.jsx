@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import PageWrapper from '../components/PageWrapper.jsx'
 import Reveal from '../components/Reveal.jsx'
 import ImagePlaceholder from '../components/ImagePlaceholder.jsx'
+import ArrowLink from '../components/ArrowLink.jsx'
+import Squiggle from '../components/Squiggle.jsx'
 
 const pillars = [
   {
@@ -34,8 +36,8 @@ export default function Concept() {
     <PageWrapper>
       {/* Header */}
       <section className="relative overflow-hidden bg-beige px-5 pb-20 pt-36 text-center md:pt-44">
-        <div className="pointer-events-none absolute -left-24 top-32 h-72 w-72 rounded-blob bg-matcha/15" />
-        <div className="pointer-events-none absolute -right-20 bottom-0 h-64 w-64 rounded-blob bg-olive/10" />
+        <div className="animate-blob pointer-events-none absolute -left-24 top-32 h-72 w-72 rounded-blob bg-matcha/15" />
+        <div className="animate-blob-slow pointer-events-none absolute -right-20 bottom-0 h-64 w-64 rounded-blob bg-olive/10" />
         <Reveal className="relative">
           <p className="text-xs uppercase tracking-widest2 text-olive">
             Das Concept
@@ -43,7 +45,9 @@ export default function Concept() {
           <h1 className="mx-auto mt-4 max-w-3xl font-serif text-5xl font-bold leading-tight text-brown md:text-7xl">
             Mehr als ein Café.
             <br />
-            <em className="text-olive">Ein Concept Store.</em>
+            <Squiggle>
+              <em className="text-olive">Ein Concept Store.</em>
+            </Squiggle>
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-brown/70">
             KOOA ist ein Ort zum Verweilen, Machen und Entdecken. Drei Dinge
@@ -62,11 +66,16 @@ export default function Concept() {
               className="grid items-center gap-10 md:grid-cols-2 md:gap-20"
             >
               <Reveal className={i % 2 === 1 ? 'md:order-2' : ''}>
-                <ImagePlaceholder
-                  label={pillar.img}
-                  tone={pillar.tone}
-                  className="aspect-[4/3] w-full md:aspect-[5/4]"
-                />
+                <motion.div
+                  whileHover={{ rotate: i % 2 === 0 ? -1 : 1, scale: 1.01 }}
+                  transition={{ type: 'spring', stiffness: 200, damping: 18 }}
+                >
+                  <ImagePlaceholder
+                    label={pillar.img}
+                    tone={pillar.tone}
+                    className="aspect-[4/3] w-full md:aspect-[5/4]"
+                  />
+                </motion.div>
               </Reveal>
               <Reveal delay={0.15} className={i % 2 === 1 ? 'md:order-1' : ''}>
                 <p className="text-xs uppercase tracking-widest2 text-olive">
@@ -99,18 +108,12 @@ export default function Concept() {
             Komm rein, schau dich um, bleib ein bisschen.
           </h2>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/events"
-              className="rounded-full bg-matcha px-8 py-3.5 text-sm font-semibold text-charcoal transition-all duration-300 hover:-translate-y-0.5 hover:bg-cream"
-            >
+            <ArrowLink to="/events" variant="matcha" className="font-semibold">
               Nächste Events
-            </Link>
-            <Link
-              to="/contact"
-              className="rounded-full border border-cream/30 px-8 py-3.5 text-sm font-medium text-cream transition-all duration-300 hover:-translate-y-0.5 hover:border-matcha hover:text-matcha"
-            >
+            </ArrowLink>
+            <ArrowLink to="/contact" variant="outlineLight">
               So findest du uns
-            </Link>
+            </ArrowLink>
           </div>
         </Reveal>
       </section>
