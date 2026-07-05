@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import App from './App.jsx'
 // Selbst gehostete Fonts (DSGVO-konform, kein Google-CDN)
 import '@fontsource/playfair-display/400.css'
@@ -16,10 +16,14 @@ import '@fontsource/dm-sans/600.css'
 import '@fontsource/dm-sans/400-italic.css'
 import './index.css'
 
+// Im Artifact-/Single-File-Modus gibt es keinen Server-Fallback für
+// Client-Routen, daher Hash-Routing; die echte Website nutzt saubere URLs.
+const Router = import.meta.env.MODE === 'artifact' ? HashRouter : BrowserRouter
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <Router>
       <App />
-    </BrowserRouter>
+    </Router>
   </StrictMode>,
 )
